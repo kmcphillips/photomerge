@@ -19,9 +19,9 @@ class Camera
   private
 
   def load_photos
-    @photos = []
-
-
+    @photos = Dir.glob("#{ folder.path }/*.{JPG,jpg}").map do |path|
+      Photo.new(path, camera: self)
+    end
   end
 
   def validated_folder(path)
