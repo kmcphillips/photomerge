@@ -17,7 +17,7 @@ class Camera
   end
 
   def inspect
-    "#<Camera #{ name } with #{ @photos.count } photos, suffix: #{ suffix }, path: #{ folder }, output: #{ output }>"
+    "#<Camera #{ name } with #{ @photos.count } photos, suffix: #{ suffix }, path: #{ folder.path }, output: #{ output.path }>"
   end
 
   private

@@ -9,7 +9,7 @@ class Photo
   end
 
   def inspect
-    "#<Photo path: #{ path }, camera: #{ camera.inspect }>"
+    "#<Photo path: #{ path.path }, camera: #{ camera.inspect }>"
   end
 
   private
