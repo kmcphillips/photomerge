@@ -23,9 +23,15 @@ class Camera
   private
 
   def load_photos
+    puts "Loading camera #{ name }"
+
     @photos = Dir.glob("#{ folder.path }/*.{JPG,jpg}").map do |path|
       Photo.new(path, camera: self)
     end
+
+    puts "\nDone with #{ @photos.count } photos"
+
+    @photos
   end
 
   def validated_folder(path)

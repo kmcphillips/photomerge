@@ -15,6 +15,8 @@ class Photo
   private
 
   def load_photo
+    print "."
+
     @exif = EXIFR::JPEG.new(path.path)
   end
 end
