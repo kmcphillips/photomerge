@@ -8,6 +8,10 @@ class Photo
     load_photo
   end
 
+  def inspect
+    "#<Photo path: #{ path }, camera: #{ camera.inspect }>"
+  end
+
   private
 
   def load_photo

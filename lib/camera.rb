@@ -1,5 +1,5 @@
 class Camera
-  attr_reader :name, :folder, :suffix
+  attr_reader :name, :folder, :suffix, :output
 
   def initialize(path, name: nil, suffix: nil, output: nil)
     @folder = validated_folder(path)
@@ -14,6 +14,10 @@ class Camera
     @suffix = suffix.presence || @name
 
     load_photos
+  end
+
+  def inspect
+    "#<Camera #{ name } with #{ @photos.count } photos, suffix: #{ suffix }, path: #{ folder }, output: #{ output }>"
   end
 
   private
