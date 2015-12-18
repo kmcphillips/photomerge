@@ -8,8 +8,12 @@ class Photo
     load_photo
   end
 
+  def date
+    exif.date_time
+  end
+
   def inspect
-    "#<Photo path: #{ path.path }, camera: #{ camera.inspect }, exif: { date_time: #{ exif.date_time }>"
+    "#<Photo path: #{ path.path }, camera: #{ camera.inspect }, exif: { date_time: #{ date }>"
   end
 
   private

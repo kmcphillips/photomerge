@@ -1,5 +1,5 @@
 class Camera
-  attr_reader :name, :folder, :suffix, :output
+  attr_reader :name, :folder, :suffix, :output, :photos
 
   def initialize(path, name: nil, suffix: nil, output: nil)
     @folder = validated_folder(path)

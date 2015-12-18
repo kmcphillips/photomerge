@@ -35,4 +35,6 @@ cameras = [
   ),
 ]
 
+photos = cameras.map(&:photos).flatten.sort{|x,y| x.date <=> y.date }
+
 binding.pry
