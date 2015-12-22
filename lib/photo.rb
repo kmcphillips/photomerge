@@ -9,7 +9,14 @@ class Photo
   end
 
   def date
-    exif.date_time
+    exif.create_date
+  end
+
+  def date=(new_date)
+    exif.date_time_original = new_date
+    exif.create_date = new_date
+
+    exif.save
   end
 
   def inspect
@@ -20,7 +27,6 @@ class Photo
 
   def load_photo
     print "."
-
-    @exif = EXIFR::JPEG.new(path.path)
+    @exif = MiniExiftool.new(path.path)
   end
 end

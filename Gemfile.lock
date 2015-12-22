@@ -8,10 +8,10 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     coderay (1.1.0)
-    exifr (1.2.3.1)
     i18n (0.7.0)
     json (1.8.3)
     method_source (0.8.2)
+    mini_exiftool (2.5.1)
     minitest (5.8.2)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -27,5 +27,8 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
-  exifr
+  mini_exiftool
   pry
+
+BUNDLED WITH
+   1.10.6

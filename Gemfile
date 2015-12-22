@@ -1,5 +1,5 @@
 source "https://rubygems.org"
 
 gem "pry"
-gem "exifr"
+gem "mini_exiftool"
 gem "activesupport"
