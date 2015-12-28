@@ -1,0 +1,16 @@
+cameras:
+  -
+    input: "/path/to/kevin"
+    output: "/path/to/output"
+    name: kevin
+    suffix: km
+  -
+    input: "/path/to/patrick"
+    output: "/path/to/output"
+    name: patrick
+    suffix: ph
+  -
+    input: "/path/to/eliot"
+    output: "/path/to/output"
+    name: eliot
+    suffix: eb
