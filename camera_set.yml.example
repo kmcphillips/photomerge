@@ -4,13 +4,19 @@ cameras:
     output: "/path/to/output"
     name: kevin
     suffix: km
+    identity_photo: example.jpg
+    exif_date_offset: 1.minutes
   -
     input: "/path/to/patrick"
     output: "/path/to/output"
     name: patrick
     suffix: ph
+    identity_photo: example.jpg
+    exif_date_offset: 1.minutes
   -
     input: "/path/to/eliot"
     output: "/path/to/output"
     name: eliot
     suffix: eb
+    identity_photo: example.jpg
+    exif_date_offset: 1.minutes

@@ -1,7 +1,7 @@
 class Camera
-  attr_reader :name, :folder, :suffix, :output, :photos
+  attr_reader :name, :folder, :suffix, :output, :photos, :identity_photo
 
-  def initialize(path, name: nil, suffix: nil, output: nil)
+  def initialize(path, name: nil, suffix: nil, output: nil, identity_photo: nil)
     @folder = validated_folder(path)
 
     if output.present?
@@ -14,10 +14,15 @@ class Camera
     @suffix = suffix.presence || @name
 
     load_photos
+
+    if identity_photo.present?
+      @identity_photo = @photos.find{|photo| photo.path.path.ends_with?("/#{ identity_photo }") }
+      raise PhotoMergeError, "identity photo #{ identity_photo } could not be found" unless @identity_photo
+    end
   end
 
   def inspect
-    "#<Camera #{ name } with #{ @photos.count } photos, suffix: #{ suffix }, path: #{ folder.path }, output: #{ output.path }>"
+    "#<Camera #{ name } with #{ @photos.count } photos, suffix: #{ suffix }, path: #{ folder.path }, output: #{ output.path }, identity_photo: #{ @identity_photo.try(:path) }>"
   end
 
   private

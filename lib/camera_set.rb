@@ -22,6 +22,7 @@ class CameraSet
           output: camera_config["output"],
           name: camera_config["name"],
           suffix: camera_config["suffix"],
+          identity_photo: camera_config["identity_photo"],
         )
       end
 
