@@ -1,9 +1,11 @@
 class CameraSet
-  attr_accessor :cameras, :output, :sequence
+  attr_accessor :cameras, :output, :sequence, :identity_photo_expected_time, :processed_photos
 
-  def initialize(output: nil)
+  def initialize(output: nil, identity_photo_expected_time: nil)
     @cameras = []
     @sequence = 1
+    @identity_photo_expected_time = identity_photo_expected_time
+    @processed_photos = []
 
     if output.present?
       @output = CameraSet.validated_folder(output)
@@ -13,14 +15,26 @@ class CameraSet
   end
 
   def photos
-    cameras.map(&:photos).flatten.sort{|x,y| x.date <=> y.date }
+    cameras.map(&:photos).flatten.sort{|x,y| x.date_with_offset <=> y.date_with_offset }
   end
 
   def process
+    puts "Processing #{ photos.count } photos from #{ cameras.count } cameras"
+
     photos.each do |photo|
-      # FileUtils.cp(photo.path.path, File.join(output.path, photo.fileanme(sequence)))
-      puts "Copy #{photo.path.path} to #{File.join(output.path, photo.filename(sequence))}"
+      destination_path = File.join(output.path, photo.filename(@sequence))
+
+      FileUtils.cp(photo.path.path, destination_path)
+
+      processed_photo = ProcessedPhoto.new(destination_path, camera: photo.camera)
+      processed_photo.date = photo.date_with_offset
+      processed_photos << processed_photo
+
+      @sequence = @sequence + 1
+      print "."
     end
+
+    puts "\nDone"
   end
 
   class << self
@@ -28,15 +42,19 @@ class CameraSet
     def from_file(filename)
       config = YAML.load_file(filename)
 
-      set = self.new(output: config["output"])
+      set = self.new(output: config["output"], identity_photo_expected_time: Time.new(*config["identity_photo_expected_time"]))
 
       config["cameras"].each do |camera_config|
-        set.cameras << Camera.new(
+        camera = Camera.new(
           camera_config["input"],
           name: camera_config["name"],
           suffix: camera_config["suffix"],
           identity_photo: camera_config["identity_photo"],
         )
+
+        camera.identity_photo_offset = set.identity_photo_expected_time - camera.identity_photo.date
+
+        set.cameras << camera
       end
 
       set

@@ -1,4 +1,11 @@
-identity_photo_expected_date:
+identity_photo_expected_time:
+  - 2015
+  - 12
+  - 6
+  - 17
+  - 3
+  - 36
+  - "-06:00"
 output: "/path/to/output"
 
 cameras:

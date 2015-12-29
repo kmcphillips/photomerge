@@ -1,5 +1,6 @@
 class Camera
   attr_reader :name, :folder, :suffix, :photos, :identity_photo
+  attr_accessor :identity_photo_offset
 
   def initialize(path, name: nil, suffix: nil, identity_photo: nil)
     @folder = CameraSet.validated_folder(path)

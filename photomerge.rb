@@ -12,7 +12,5 @@ Dir["./lib/*.rb"].each{ |f| require f }
 
 class PhotoMergeError < StandardError ; end
 
-camera_set = CameraSet.from_file("camera_set.yml")
-camera_set.process
-
-binding.pry
+set = CameraSet.from_file("camera_set.yml")
+set.process

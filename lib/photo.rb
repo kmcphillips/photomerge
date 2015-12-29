@@ -11,6 +11,10 @@ class Photo
     exif.create_date
   end
 
+  def date_with_offset
+    date + camera.identity_photo_offset
+  end
+
   def inspect
     "#<#{ self.class } path: #{ path.path }, camera: #{ camera.inspect }, exif: { date_time: #{ date }>"
   end
