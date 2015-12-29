@@ -7,6 +7,7 @@ require "mini_exiftool"
 require "yaml"
 require "pry"
 
+require Dir["./lib/photo.rb"].first
 Dir["./lib/*.rb"].each{ |f| require f }
 
 class PhotoMergeError < StandardError ; end

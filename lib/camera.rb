@@ -24,7 +24,9 @@ class Camera
     puts "Loading camera #{ name }"
 
     @photos = Dir.glob("#{ folder.path }/*.{JPG,jpg}").map do |path|
-      Photo.new(path, camera: self)
+      photo = OriginalPhoto.new(path, camera: self)
+      print "."
+      photo
     end
 
     puts "\nDone with #{ @photos.count } photos"
