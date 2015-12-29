@@ -19,6 +19,11 @@ class Photo
     exif.save
   end
 
+  def filename(sequence)
+    sections = ["IMG", "%04d" % sequence, camera.suffix]
+    "#{ sections.join("_") }.jpg"
+  end
+
   def inspect
     "#<Photo path: #{ path.path }, camera: #{ camera.inspect }, exif: { date_time: #{ date }>"
   end

@@ -3,6 +3,7 @@ class CameraSet
 
   def initialize
     @cameras = []
+    @sequence = 1
   end
 
   def photos
