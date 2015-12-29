@@ -1,15 +1,8 @@
 class Camera
-  attr_reader :name, :folder, :suffix, :output, :photos, :identity_photo
+  attr_reader :name, :folder, :suffix, :photos, :identity_photo
 
-  def initialize(path, name: nil, suffix: nil, output: nil, identity_photo: nil)
-    @folder = validated_folder(path)
-
-    if output.present?
-      @output = validated_folder(output)
-    else
-      @output = validated_folder(File.join(path, "output"))
-    end
-
+  def initialize(path, name: nil, suffix: nil, identity_photo: nil)
+    @folder = CameraSet.validated_folder(path)
     @name = name.presence || @folder.path.split("/").last
     @suffix = suffix.presence || @name
 
@@ -22,7 +15,7 @@ class Camera
   end
 
   def inspect
-    "#<Camera #{ name } with #{ @photos.count } photos, suffix: #{ suffix }, path: #{ folder.path }, output: #{ output.path }, identity_photo: #{ @identity_photo.try(:path) }>"
+    "#<Camera #{ name } with #{ @photos.count } photos, suffix: #{ suffix }, path: #{ folder.path }, identity_photo: #{ @identity_photo.try(:path) }>"
   end
 
   private
@@ -37,16 +30,5 @@ class Camera
     puts "\nDone with #{ @photos.count } photos"
 
     @photos
-  end
-
-  def validated_folder(path)
-    if File.exists?(path)
-      folder = File.new(path)
-      raise PhotoMergeError, "Path #{ path } is not a directory" unless File.directory?(folder)
-    else
-      raise PhotoMergeError, "Path #{ path } does not exist"
-    end
-
-    folder
   end
 end
